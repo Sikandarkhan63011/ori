@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Automation>
+	<Execution>
+		<Login>
+			<url>http://adactinhotelapp.com/</url>
+			<username>tester777</username>
+			<password>sikandar</password>
+			<wrongusername>tester77</wrongusername>
+			<wrongpassword>sikanda</wrongpassword>
+		</Login>
+		<Loginhrm>
+			<url>http://adactinhotelapp.com/</url>
+			<username>Admin</username>
+			<password>admin123</password>
+			<url>http://adactinhotelapp.com/</url>
+			<usernamepm>Admin</usernamepm>
+			<empName>Paul Collings</empName>
+		</Loginhrm>
+	
+</Execution>
+</Automation>

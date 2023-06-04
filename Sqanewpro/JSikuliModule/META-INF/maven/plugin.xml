@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <description>The missing bridge between Java and native C++</description>
+  <groupId>com.googlecode.javacpp</groupId>
+  <artifactId>javacpp</artifactId>
+  <version>0.1</version>
+  <goalPrefix>javacpp</goalPrefix>
+  <isolatedRealm>false</isolatedRealm>
+  <inheritedByDefault>true</inheritedByDefault>
+  <mojos>
+    <mojo>
+      <goal>build</goal>
+      <description>Goal to call JavaCPP Builder (Java class -&gt; C++ JNI -&gt; native library)</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <phase>process-classes</phase>
+      <implementation>com.googlecode.javacpp.BuildMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+        <parameter>
+          <name>classOrPackageName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Process only this class or package (suffixed with .* or .**)</description>
+        </parameter>
+        <parameter>
+          <name>classOrPackageNames</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Process only these classes or packages (suffixed with .* or .**)</description>
+        </parameter>
+        <parameter>
+          <name>classPath</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Load user classes from classPath</description>
+        </parameter>
+        <parameter>
+          <name>classPaths</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Load user classes from classPaths</description>
+        </parameter>
+        <parameter>
+          <name>compile</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Compile and delete the generated .cpp files</description>
+        </parameter>
+        <parameter>
+          <name>compilerOptions</name>
+          <type>java.lang.String[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Pass compilerOptions directly to compiler</description>
+        </parameter>
+        <parameter>
+          <name>environmentVariables</name>
+          <type>java.util.Map</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Environment variables added to the compiler subprocess</description>
+        </parameter>
+        <parameter>
+          <name>jarPrefix</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Also create a JAR file named &quot;&lt;jarPrefix&gt;-&lt;platform.name&gt;.jar&quot;</description>
+        </parameter>
+        <parameter>
+          <name>outputDirectory</name>
+          <type>java.io.File</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Output all generated files to outputDirectory</description>
+        </parameter>
+        <parameter>
+          <name>outputName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Output everything in a file named after given outputName</description>
+        </parameter>
+        <parameter>
+          <name>properties</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Load all properties from resource</description>
+        </parameter>
+        <parameter>
+          <name>propertyFile</name>
+          <type>java.io.File</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Load all properties from file</description>
+        </parameter>
+        <parameter>
+          <name>propertyKeysAndValues</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Set property keys to values</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <classOrPackageName implementation="java.lang.String">${classOrPackageName}</classOrPackageName>
+        <properties implementation="java.lang.String">${properties}</properties>
+        <outputDirectory implementation="java.io.File">${outputDirectory}</outputDirectory>
+        <jarPrefix implementation="java.lang.String">${jarPrefix}</jarPrefix>
+        <propertyKeysAndValues implementation="java.util.Properties">${propertyKeysAndValues}</propertyKeysAndValues>
+        <classOrPackageNames implementation="java.lang.String[]">${classOrPackageNames}</classOrPackageNames>
+        <compilerOptions implementation="java.lang.String[]">${compilerOptions}</compilerOptions>
+        <outputName implementation="java.lang.String">${outputName}</outputName>
+        <compile implementation="boolean" default-value="true">${compile}</compile>
+        <classPath implementation="java.lang.String" default-value="${project.build.outputDirectory}">${classPath}</classPath>
+        <propertyFile implementation="java.io.File">${propertyFile}</propertyFile>
+        <classPaths implementation="java.lang.String[]">${classPaths}</classPaths>
+        <environmentVariables implementation="java.util.Map">${environmentVariables}</environmentVariables>
+      </configuration>
+    </mojo>
+  </mojos>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+  </dependencies>
+</plugin>
